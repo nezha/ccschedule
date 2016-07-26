@@ -11,10 +11,20 @@ public class MongoStates {
     private String dbName;
     private String colName;
     private int cnt;
-    private int timeStamp;
+    private long timeStamp;
     private int  id;
 
-    public int getTimeStamp() {
+    public MongoStates(long timeStamp, int cnt, String colName, String dbName, String fieldTwo, String fieldOne, String dataCategory) {
+        this.timeStamp = timeStamp;
+        this.cnt = cnt;
+        this.colName = colName;
+        this.dbName = dbName;
+        this.fieldTwo = fieldTwo;
+        this.fieldOne = fieldOne;
+        this.dataCategory = dataCategory;
+    }
+
+    public long getTimeStamp() {
         return timeStamp;
     }
 
