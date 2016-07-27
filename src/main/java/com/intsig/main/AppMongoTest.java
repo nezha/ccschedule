@@ -4,15 +4,20 @@ package com.intsig.main;
 import com.intsig.Dao.MongoDBDao;
 import com.intsig.Model.MongoPersonBaseModel;
 import com.mongodb.client.MongoCollection;
+import org.apache.commons.dbcp.BasicDataSource;
 import org.bson.Document;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 /**
@@ -54,5 +59,30 @@ public class AppMongoTest {
         long cnt = personBaseCol.count();
         System.out.print(cnt);
         mongodb.close();
+    }
+
+    @Test
+    public void mysqlTest() throws Exception{
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("db4MySql.xml");
+        BasicDataSource basicDataSource = (BasicDataSource) ctx.getBean("hj_base");
+        Connection conn = basicDataSource.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("select * from SCHEDULE_TEST");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                System.out.println("Comapny: " + rs.getString("deal_count"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
     }
 }

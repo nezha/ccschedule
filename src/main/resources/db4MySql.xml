@@ -14,13 +14,13 @@
 			<value>false</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://192.168.8.30:3306/schedule?characterEncoding=UTF-8</value>
+			<value>jdbc:mysql://115.159.203.126:3306/schedule?characterEncoding=UTF-8</value>
 		</property>
 		<property name="username">
-			<value>root</value>
+			<value>nezha</value>
 		</property>
 		<property name="password">
-			<value>admin</value>
+			<value>123456</value>
 		</property>
 	</bean>
 </beans>
